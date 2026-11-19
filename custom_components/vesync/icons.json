@@ -1,0 +1,77 @@
+{
+  "entity": {
+    "button": {
+      "reset_filter": {
+        "default": "mdi:air-filter"
+      }
+    },
+    "fan": {
+      "vesync": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "advanced_sleep": "mdi:sleep",
+              "auto": "mdi:fan-auto",
+              "eco": "mdi:leaf",
+              "pet": "mdi:paw",
+              "sleep": "mdi:sleep",
+              "turbo": "mdi:weather-tornado"
+            }
+          }
+        }
+      }
+    },
+    "select": {
+      "indicator_ring": {
+        "default": "mdi:circle-outline"
+      },
+      "quiet_period_mode": {
+        "default": "mdi:volume-off"
+      }
+    },
+    "sensor": {
+      "carbon_filter_life": {
+        "default": "mdi:air-filter"
+      },
+      "pre_filter_life": {
+        "default": "mdi:air-filter"
+      },
+      "filter_remaining_days": {
+        "default": "mdi:calendar-clock"
+      },
+      "total_clean_air": {
+        "default": "mdi:weather-windy"
+      },
+      "voc": {
+        "default": "mdi:molecule"
+      },
+      "no2": {
+        "default": "mdi:molecule"
+      },
+      "auto_profile": {
+        "default": "mdi:shield-check"
+      }
+    },
+    "switch": {
+      "light_detection": {
+        "default": "mdi:brightness-auto"
+      },
+      "quiet_period": {
+        "default": "mdi:volume-off"
+      }
+    },
+    "time": {
+      "quiet_period_start": {
+        "default": "mdi:clock-start"
+      },
+      "quiet_period_end": {
+        "default": "mdi:clock-end"
+      }
+    }
+  },
+  "services": {
+    "update_devices": {
+      "service": "mdi:update"
+    }
+  }
+}
