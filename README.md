@@ -15,11 +15,11 @@ entities stay the same. Remove it when upstream support lands.
   - [#562](https://github.com/webdjoe/pyvesync/pull/562): light-detection toggle fix
   - [#561](https://github.com/webdjoe/pyvesync/pull/561): timer fix
   - Eleva 300X model codes on the same class, following the data in [#545](https://github.com/webdjoe/pyvesync/issues/545)
-- **Integration:** this is core's 2026.11.1 code, plus the entities below. They only appear on devices that report the matching fields, so other VeSync devices are unchanged.
+- **Integration:** this is core's 2026.11.1 code, plus the entities below. Fans and purifiers that support manual mode also get a `manual` preset. They only appear on devices that report the matching fields, so other VeSync devices are unchanged.
 
 | Platform | Entity | Eleva 300X | Eleva 500X |
 | --- | --- | :-: | :-: |
-| fan | Power, speed 1–4, presets `auto` / `sleep` | ✔ | ✔ |
+| fan | Power, speed 1–4, presets `auto` / `manual` / `sleep`, `speed_level` attribute (Off / Standby / Level 1–4) | ✔ | ✔ |
 | sensor | PM1, PM2.5, PM10, AQI, air quality | ✔ | ✔ |
 | sensor | VOC index, NO2 index | | ✔ |
 | sensor | Filter / carbon filter / pre-filter lifetime, filter remaining (days) | ✔ | ✔ |

@@ -111,6 +111,11 @@ def entities(device):
         ent = fan.VeSyncFanHA(device, coord)
         out.append(("fan", "presets", ent.preset_modes))
         out.append(("fan", "percentage", ent.percentage))
+        out.append(("fan", "preset_mode", ent.preset_mode))
+        out.append(("fan", "speed_level", ent.extra_state_attributes.get("speed_level")))
+        level = ent.extra_state_attributes.get("speed_level")
+        if level is not None:
+            assert level in TRANSLATIONS["fan"]["vesync"]["state_attributes"]["speed_level"]["state"]
     for platform, key, _ in out:
         if platform == "fan" or key in DEVICE_CLASS_NAMED:
             continue
@@ -149,6 +154,9 @@ async def main():
         assert values[("switch", "light_detection")] is True
         assert values[("time", "quiet_period_start")] == dtime(22, 0)
         assert values[("fan", "percentage")] == 50  # deviceProp level 2 of 4
+        assert values[("fan", "presets")] == ["auto", "manual", "sleep"]
+        assert values[("fan", "preset_mode")] == "manual"
+        assert values[("fan", "speed_level")] == "level_2"
         assert ("sensor", "voc") not in values
 
         api.side_effect = None
@@ -165,6 +173,19 @@ async def main():
         assert sent()["data"] == {
             "quietPeriodSwitch": 0, "modeIdx": 0, "startTime": 79200, "endTime": 25200
         }
+        fan_ent = fan.VeSyncFanHA(dev300, MagicMock())
+        fan_ent.async_write_ha_state = MagicMock()
+        dev300.state.mode = "auto"
+        await fan_ent.async_set_preset_mode("manual")
+        # V2 purifiers enter manual mode by setting the last manual speed.
+        assert sent()["method"] == "setLevel"
+        assert sent()["data"]["manualSpeedLevel"] == 2
+        dev300.state.device_status = "off"
+        assert fan_ent.extra_state_attributes["speed_level"] == "off"
+        dev300.state.device_status = "on"
+        dev300.state.fan_level = 0
+        assert fan_ent.extra_state_attributes["speed_level"] == "standby"
+
         light = next(d for d in switch.SENSOR_DESCRIPTIONS if d.key == "light_detection")
         assert await light.off_fn(dev300)
         assert sent()["data"] == {"lightDetectionSwitch": 0}

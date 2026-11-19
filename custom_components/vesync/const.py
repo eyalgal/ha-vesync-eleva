@@ -41,6 +41,7 @@ VS_FAN_MODE_ECO = "eco"
 # not a full list as manual is used as speed not present
 VS_FAN_MODE_PRESET_LIST_HA = [
     VS_FAN_MODE_AUTO,
+    VS_FAN_MODE_MANUAL,
     VS_FAN_MODE_SLEEP,
     VS_FAN_MODE_TURBO,
     VS_FAN_MODE_PET,

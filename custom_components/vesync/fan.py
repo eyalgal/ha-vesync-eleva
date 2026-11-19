@@ -239,7 +239,19 @@ class VeSyncFanHA(VeSyncBaseEntity[VeSyncFanBase | VeSyncPurifier], FanEntity):
         if hasattr(self.device.state, "mode"):
             attr["mode"] = self.device.state.mode
 
+        if isinstance(self.device, VeSyncAirBaseV2):
+            attr["speed_level"] = self._speed_level()
+
         return attr
+
+    def _speed_level(self) -> str:
+        """Return the running fan level as a translatable string."""
+        if not self.is_on:
+            return "off"
+        level = self.device.state.fan_level
+        if level in self.device.fan_levels:
+            return f"level_{level}"
+        return "standby"
 
     @override
     async def async_set_percentage(self, percentage: int) -> None:
@@ -313,6 +325,8 @@ class VeSyncFanHA(VeSyncBaseEntity[VeSyncFanBase | VeSyncPurifier], FanEntity):
             success = await self.device.set_auto_mode()
         elif vs_mode == VS_FAN_MODE_SLEEP:
             success = await self.device.set_sleep_mode()
+        elif vs_mode == VS_FAN_MODE_MANUAL:
+            success = await self.device.set_manual_mode()
         elif vs_mode == VS_FAN_MODE_PET:
             if hasattr(self.device, "set_pet_mode"):
                 success = await self.device.set_pet_mode()
