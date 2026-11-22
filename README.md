@@ -10,7 +10,7 @@ entities stay the same. Remove it when upstream support lands.
 ## How it works
 
 - **Library:** the integration installs [`eyalgal/pyvesync@eleva-support`](https://github.com/eyalgal/pyvesync/tree/eleva-support)
-  (`3.5.1.post1`). That is pyvesync 3.5.1 plus these open upstream PRs:
+  (`3.5.1.post2`, branch `pr563-test`). That is [webdjoe/pyvesync#563](https://github.com/webdjoe/pyvesync/pull/563) rebased on pyvesync `dev`, which now includes the Eleva 300X commit. Earlier releases used `3.5.1.post1`: pyvesync 3.5.1 plus these open upstream PRs:
   - [webdjoe/pyvesync#563](https://github.com/webdjoe/pyvesync/pull/563): Eleva 500X support (`VeSyncAirEleva`)
   - [#562](https://github.com/webdjoe/pyvesync/pull/562): light-detection toggle fix
   - [#561](https://github.com/webdjoe/pyvesync/pull/561): timer fix

@@ -25,8 +25,8 @@
     "pyvesync"
   ],
   "requirements": [
-    "pyvesync @ https://github.com/eyalgal/pyvesync/releases/download/eleva-3.5.1.post1/pyvesync-3.5.1.post1-py3-none-any.whl"
+    "pyvesync @ https://github.com/eyalgal/pyvesync/releases/download/pr563-3.5.1.post2/pyvesync-3.5.1.post2-py3-none-any.whl"
   ],
   "issue_tracker": "https://github.com/eyalgal/ha-vesync-eleva/issues",
-  "version": "2026.11.1.2"
+  "version": "2026.11.1.3"
 }
